@@ -224,8 +224,14 @@
     .hero-context {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 16px;
       animation: fadeUp 0.75s 0.4s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    .hero-context-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
     .hero-context-label {
@@ -238,7 +244,7 @@
 
     .hero-context-chips {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
     }
 
@@ -251,6 +257,78 @@
       padding: 7px 14px;
       letter-spacing: 0.3px;
       background: rgba(255,255,255,0.04);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .hero-left {
+        padding: 120px 40px 60px;
+      }
+      .hero-right {
+        display: none;
+      }
+      .about {
+        grid-template-columns: 1fr;
+        padding: 64px 40px;
+        gap: 48px;
+      }
+      .about-photo { order: -1; }
+      .about-photo-ring { width: 240px; height: 240px; }
+      .projects { padding: 60px 40px 80px; }
+      .card {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .card-right { min-height: 280px; margin: 0 16px 16px; }
+      footer { padding: 60px 40px; flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        top: 16px;
+        padding: 8px 10px;
+        gap: 2px;
+      }
+      nav a {
+        font-size: 13px;
+        padding: 8px 12px;
+      }
+      .hero-left {
+        padding: 100px 24px 60px;
+      }
+      .hero-headline {
+        font-size: clamp(38px, 9vw, 60px);
+        letter-spacing: -1.5px;
+      }
+      .hero-subhead { font-size: 17px; }
+      .hero-ctas { flex-direction: column; align-items: flex-start; }
+      .cta-primary, .cta-secondary { width: 100%; justify-content: center; }
+      .about { padding: 48px 24px; }
+      .about-text h2 { font-size: 28px; }
+      .about-text p { font-size: 18px; }
+      .projects { padding: 48px 24px 64px; }
+      .projects-header h2 { font-size: 28px; }
+      .card-left { padding: 32px 28px; }
+      .card-title { font-size: 26px; }
+      .card-desc { font-size: 16px; }
+      .card-outcome-value { font-size: 16px; }
+      footer { padding: 48px 24px; gap: 24px; }
+      .footer-left h3 { font-size: 24px; }
+      .footer-right { flex-direction: column; width: 100%; }
+      .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+      .vibe-badge { bottom: 16px; right: 16px; }
+      .footer-bottom { padding: 20px 24px; }
+    }
+
+    @media (max-width: 480px) {
+      nav a { font-size: 12px; padding: 7px 10px; }
+      .hero-headline { font-size: 36px; }
+      .hero-role-pill { flex-wrap: wrap; }
+      .hero-role-text { font-size: 11px; }
     }
 
     /* ── HERO RIGHT: Visual Panel ── */
@@ -804,8 +882,8 @@
 
     .card-footer {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      flex-direction: column;
+      gap: 20px;
       margin-top: 32px;
     }
 
@@ -830,17 +908,25 @@
     }
 
     .card-cta {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--brand) 0%, #7b4dff 100%);
+      color: #fff;
       font-size: 15px;
       font-weight: 700;
-      color: var(--brand);
+      padding: 14px 28px;
+      border-radius: 100px;
       letter-spacing: 0.3px;
-      transition: gap 0.2s;
+      width: fit-content;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 6px 24px rgba(73,28,255,0.3);
     }
 
-    .card:hover .card-cta { gap: 14px; }
+    .card:hover .card-cta {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(73,28,255,0.45);
+    }
 
     .card-cta svg { flex-shrink: 0; }
 
@@ -1199,8 +1285,8 @@
   <!-- NAV -->
   <nav>
     <a href="#hero" class="active">Home</a>
-    <a href="#projects">Impactful Projects</a>
     <a href="#about">About</a>
+    <a href="#projects">Impactful Projects</a>
     <a href="#" onclick="alert('Resume download coming soon')">Resume</a>
   </nav>
 
@@ -1237,13 +1323,22 @@
       </div>
 
       <div class="hero-context">
-        <span class="hero-context-label">Experience at</span>
-        <div class="hero-context-chips">
-          <span class="hero-chip">Salesforce</span>
-          <span class="hero-chip">Tableau</span>
-          <span class="hero-chip">AI / ML UX</span>
-          <span class="hero-chip">Enterprise SaaS</span>
-          <span class="hero-chip" style="border-color:rgba(255,153,212,0.3);color:rgba(255,153,212,0.8);">⌥ Vibe coded with AI</span>
+        <div class="hero-context-group">
+          <span class="hero-context-label">Experience at</span>
+          <div class="hero-context-chips">
+            <span class="hero-chip">Salesforce</span>
+            <span class="hero-chip">Tableau</span>
+          </div>
+        </div>
+        <div class="hero-context-group">
+          <span class="hero-context-label">Design Expertise</span>
+          <div class="hero-context-chips">
+            <span class="hero-chip">AI / ML UX</span>
+            <span class="hero-chip">Enterprise SaaS</span>
+            <span class="hero-chip">Data Storytelling</span>
+            <span class="hero-chip">0→1</span>
+            <span class="hero-chip" style="border-color:rgba(255,153,212,0.3);color:rgba(255,153,212,0.8);">⌥ Vibe Coded</span>
+          </div>
         </div>
       </div>
 
@@ -1366,7 +1461,7 @@
   <!-- ABOUT -->
   <section class="about" id="about">
     <div class="about-text reveal">
-      <h2>From advertising to<br>complex systems UX</h2>
+      <h2>From advertising to complex systems UX</h2>
       <p>
         I started in advertising and digital media, where the work was fast, measurable, and stakeholder-heavy.
         Wearing multiple hats—strategy, research, client management, and design execution—trained me to clarify
@@ -1390,8 +1485,7 @@
     <div class="about-photo reveal reveal-delay-2">
       <div class="about-photo-ring">
         <div class="about-photo-inner">
-          <img src="https://www.figma.com/api/mcp/asset/31fbc95e-4814-44a9-aca8-2ea1bd88c7a0" alt="Aditya Yellamraju" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
-          <div class="about-photo-placeholder" style="display:none;">👤</div>
+          <div id="photo-placeholder" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:80px;opacity:0.3;">👤</div>
         </div>
       </div>
     </div>
@@ -1431,7 +1525,7 @@
               <span class="card-outcome-value">0→1 · 4-year initiative · Cross-cloud impact</span>
             </div>
             <span class="card-cta">
-              View case study
+              View Project
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </span>
           </div>
@@ -1519,7 +1613,7 @@
               <span class="card-outcome-value">Metrics Digest · Pulse Homepage · AI insight flows</span>
             </div>
             <span class="card-cta">
-              View case study
+              View Project
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </span>
           </div>
@@ -1620,7 +1714,7 @@
               <span class="card-outcome-value">First NLG feature shipped across Salesforce ecosystem</span>
             </div>
             <span class="card-cta">
-              View case study
+              View Project
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </span>
           </div>
@@ -1701,7 +1795,7 @@
               <span class="card-outcome-value">Self-serve experimentation for non-technical operators</span>
             </div>
             <span class="card-cta">
-              View case study
+              View Project
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </span>
           </div>
