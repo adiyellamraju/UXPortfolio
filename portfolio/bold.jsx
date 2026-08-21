@@ -8,9 +8,21 @@ const track = (name, data) => { try { window.va && window.va("event", { name, ..
 // Responsive CSS shipped WITH the component so it works no matter which
 // index.html hosts it (deploy pipelines often swap in their own shell).
 const BOLD_RESPONSIVE_CSS = `
+  @keyframes heroDrift1 { 0%,100% { transform: translate3d(-4%, -2%, 0) scale(1); } 50% { transform: translate3d(4%, 3%, 0) scale(1.08); } }
+  @keyframes heroDrift2 { 0%,100% { transform: translate3d(3%, 2%, 0) scale(1.05); } 50% { transform: translate3d(-3%, -3%, 0) scale(1); } }
+  @keyframes scrollWheel { 0%,100% { transform: translateY(0); opacity: 1; } 50% { transform: translateY(11px); opacity: 0.25; } }
+  @keyframes scrollHint { 0%,100% { opacity: 0.75; } 50% { opacity: 1; } }
   html, body { overflow-x: hidden; }
+  .bp-vibe-rail::-webkit-scrollbar { height: 8px; }
+  .bp-vibe-rail::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 4px; }
+  .bp-vibe-rail::-webkit-scrollbar-thumb { background: rgba(167,143,255,0.4); border-radius: 4px; }
   @media (max-width: 760px) {
-    .bp-vibe-grid { grid-template-columns: 1fr !important; }
+    .bp-vibe-card { width: 88% !important; }
+    .bp-work-cards { padding: 0 16px !important; gap: 28px !important; }
+    .bp-work-header { padding: 0 16px !important; }
+    .bp-feature-body { padding: 24px 20px 28px !important; }
+    .bp-feature-body h3 { font-size: 24px !important; letter-spacing: -0.6px !important; }
+    .bp-hero { padding: 64px 16px 56px !important; }
   }
   @media (max-width: 1024px) {
     .bp-nav { padding: 16px 24px !important; }
@@ -26,7 +38,7 @@ const BOLD_RESPONSIVE_CSS = `
     .bp-work-grid { grid-template-columns: 1fr !important; }
     .bp-feature { grid-template-columns: 1fr !important; }
     .bp-feature-body { order: 2 !important; padding: 28px 24px !important; }
-    .bp-feature-mock { order: 1 !important; min-height: 320px !important; }
+    .bp-feature-mock { order: 1 !important; min-height: 0 !important; }
     .bp-feature-body h3 { font-size: 26px !important; }
     .bp-testimonials-grid { grid-template-columns: repeat(2, 1fr) !important; }
     .bp-footer { padding: 64px 24px 40px !important; }
@@ -139,7 +151,7 @@ const BoldNav = () => {
         <span style={{ width: 28, height: 28, borderRadius: 8, background: "linear-gradient(135deg,#491cff,#ff99d4)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 900, letterSpacing: -1 }}>AY</span>
         <span>aditya.design</span>
       </a>
-      <span style={{ color: "rgba(255,255,255,0.52)" }}>/agent</span>
+      <span style={{ color: "rgba(255,255,255,0.66)" }}>/agent</span>
       <span className="bp-nav-status" style={{ display: "inline-flex", alignItems: "center", gap: 6, marginLeft: 10, fontSize: 11, color: "rgba(255,255,255,0.72)", background: st.bg, padding: "3px 10px", borderRadius: 100, border: `1px solid ${st.border}`, fontFamily: "'Source Sans 3',sans-serif", fontWeight: 700, whiteSpace: "nowrap", transition: "background 0.3s, border-color 0.3s" }}>
         <span style={{ width: 6, height: 6, borderRadius: "50%", background: st.dot, flexShrink: 0, transition: "background 0.3s" }}/>
         <span style={{ opacity: vis ? 1 : 0, transition: "opacity 0.3s" }}>{st.text}</span>
@@ -321,9 +333,25 @@ const MatrixRain = () => {
   return <canvas ref={ref} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", display: "block" }}/>;
 };
 
+// ─── HERO ATMOSPHERE: soft aurora wash + fine grid ───────────────────────
+const HeroAtmosphere = () => (
+  <div aria-hidden style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
+    <div style={{ position: "absolute", inset: "-20%", background: "radial-gradient(closest-side, rgba(73,28,255,0.5), transparent 72%)", width: "78%", height: "120%", left: "-8%", top: "-32%", filter: "blur(40px)", animation: "heroDrift1 34s ease-in-out infinite" }}/>
+    <div style={{ position: "absolute", background: "radial-gradient(closest-side, rgba(255,153,212,0.3), transparent 70%)", width: "62%", height: "105%", right: "-10%", top: "-18%", filter: "blur(46px)", animation: "heroDrift2 44s ease-in-out infinite" }}/>
+    <div style={{ position: "absolute", background: "radial-gradient(closest-side, rgba(120,90,255,0.22), transparent 70%)", width: "70%", height: "90%", left: "22%", bottom: "-34%", filter: "blur(52px)", animation: "heroDrift2 52s ease-in-out infinite reverse" }}/>
+    <div style={{
+      position: "absolute", inset: 0,
+      backgroundImage: "linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px)",
+      backgroundSize: "72px 72px",
+      WebkitMaskImage: "radial-gradient(ellipse 80% 70% at 50% 42%, #000 0%, transparent 82%)",
+      maskImage: "radial-gradient(ellipse 80% 70% at 50% 42%, #000 0%, transparent 82%)",
+    }}/>
+  </div>
+);
+
 // ─── BOLD HERO: agent as the hero ────────────────────────────────────────
 const BoldHero = () => (
-  <section id="home" className="bp-hero" style={{ position: "relative", zIndex: 1, padding: "56px 32px 64px", maxWidth: 1280, margin: "0 auto" }}>
+  <section id="home" className="bp-hero" style={{ position: "relative", zIndex: 1, padding: "120px 32px 104px", maxWidth: 1280, margin: "0 auto" }}>
     <div aria-hidden className="bp-hero-face" style={{
       position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)",
       width: "100vw", height: "100%", zIndex: -1, overflow: "hidden", pointerEvents: "none",
@@ -331,9 +359,9 @@ const BoldHero = () => (
       maskImage: "linear-gradient(to bottom, #000 88%, transparent 100%)",
     }}>
       <div style={{ position: "absolute", inset: 0, background: "#1c1c26" }}/>
-      <MatrixRain/>
-      <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 66% 52% at 50% 40%, rgba(28,28,38,0.82), rgba(28,28,38,0.35) 68%, transparent 92%)" }}/>
-      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(28,28,38,0.35) 0%, rgba(28,28,38,0.2) 40%, rgba(28,28,38,0.55) 82%, #1c1c26 100%)" }}/>
+      <HeroAtmosphere/>
+      <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 66% 52% at 50% 40%, rgba(28,28,38,0.72), rgba(28,28,38,0.3) 68%, transparent 92%)" }}/>
+      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(28,28,38,0.4) 0%, rgba(28,28,38,0.18) 40%, rgba(28,28,38,0.6) 82%, #1c1c26 100%)" }}/>
     </div>
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 24, marginBottom: 40 }}>
       <h1 style={{ fontSize: 64, fontWeight: 900, lineHeight: 1.08, letterSpacing: -2, textAlign: "center", maxWidth: 1100, margin: 0, color: "#ffffff" }}>
@@ -343,8 +371,8 @@ const BoldHero = () => (
         <br/>
         <span style={{ background: "linear-gradient(90deg,#491cff,#ff99d4)", WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent" }}>Now vibe-prototyping at the speed of thought.</span>
       </h1>
-      <p className="bp-hero-sub" style={{ fontSize: 20, color: "rgba(255,255,255,0.82)", textAlign: "center", maxWidth: 720, lineHeight: 1.6, margin: 0 }}>
-        I'm <strong style={{ color: "#fff", fontWeight: 700 }}>Aditya</strong> — I design core platform and AI experiences for complex systems. These days I vibe-code them too, so design meets engineering the moment an idea lands.
+      <p className="bp-hero-sub" style={{ fontSize: 20, color: "rgba(255,255,255,0.82)", textAlign: "center", maxWidth: 760, lineHeight: 1.65, margin: 0 }}>
+        I'm <strong style={{ color: "#fff", fontWeight: 700 }}>Aditya</strong> — I design core platform and AI experiences for complex systems. So far that's <strong style={{ color: "#fff", fontWeight: 700 }}>three AI/NLG products shipped</strong>, <strong style={{ color: "#fff", fontWeight: 700 }}>five platform capabilities owned</strong>, and <strong style={{ color: "#fff", fontWeight: 700 }}>two platforms taken from 0→1</strong>. These days I vibe-code them too, so design meets engineering the moment an idea lands.
       </p>
       <span className="bp-hero-kicker" style={{ fontFamily: "ui-monospace,Menlo,monospace", fontSize: 12, color: "rgba(255,255,255,0.68)", letterSpacing: 1.5, textTransform: "uppercase", display: "inline-flex", alignItems: "center", gap: 8, marginTop: 8 }}>
         <span style={{ display: "inline-flex", animation: "sparklePulse 1.6s ease-in-out infinite", color: "#ff99d4", filter: "drop-shadow(0 0 8px rgba(255,153,212,0.7))" }}><SparkleIcon size={14}/></span> …so naturally, I vibe-coded an agent to do my bragging for me — ask it anything
@@ -370,8 +398,17 @@ const BoldHero = () => (
           Just show me the work →
         </a>
       </div>
+      <a href="#work" aria-label="Scroll to the work" style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: 10, marginTop: 44, textDecoration: "none", color: "rgba(255,255,255,0.8)" }}>
+        <span style={{
+          width: 26, height: 40, borderRadius: 13,
+          border: "2px solid rgba(255,255,255,0.62)",
+          display: "flex", justifyContent: "center", paddingTop: 7,
+        }}>
+          <span style={{ width: 3.5, height: 8, borderRadius: 2, background: "#ffffff", animation: "scrollWheel 1.6s ease-in-out infinite" }}/>
+        </span>
+        <span style={{ fontFamily: "ui-monospace,Menlo,monospace", fontSize: 10, letterSpacing: 1.6, textTransform: "uppercase", fontWeight: 700, animation: "scrollHint 1.6s ease-in-out infinite" }}>scroll</span>
+      </a>
     </div>
-    <BoldHeroStats />
   </section>
 );
 
@@ -465,7 +502,7 @@ const BigAgentChat = ({ compact }) => {
       <div className="bp-chat-header" style={{ padding: "12px 18px", borderBottom: "1px solid rgba(255,255,255,0.08)", display: "flex", alignItems: "center", gap: 12, background: "rgba(28,28,38,0.5)", fontFamily: "ui-monospace,Menlo,monospace", fontSize: 11, color: "rgba(255,255,255,0.78)" }}>
         <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#4ade80" }}/>
         agent.aditya.design — session #7f3a · claude · live
-        <span className="bp-chat-header-end" style={{ marginLeft: "auto", color: "rgba(255,255,255,0.52)" }}>vibe-coded</span>
+        <span className="bp-chat-header-end" style={{ marginLeft: "auto", color: "rgba(255,255,255,0.66)" }}>vibe-coded</span>
       </div>
       <div ref={scrollRef} className="bp-chat-body" style={{ padding: 24, display: "flex", flexDirection: "column", gap: 14, maxHeight: compact ? 360 : 420, minHeight: compact ? 300 : 380, overflowY: "auto" }}>
         {messages.map((m, i) => m.role === "system"
@@ -489,7 +526,7 @@ const BigAgentChat = ({ compact }) => {
         <input value={input} onChange={e => setInput(e.target.value)}
           placeholder="ask anything…"
           style={{ flex: 1, background: "transparent", border: "none", color: "#fff", fontSize: 15, fontFamily: "'Source Sans 3',sans-serif", outline: "none" }}/>
-        <span className="bp-cmd-hint" style={{ fontFamily: "ui-monospace,Menlo,monospace", fontSize: 11, color: "rgba(255,255,255,0.55)", display: "flex", alignItems: "center", gap: 4 }}>
+        <span className="bp-cmd-hint" style={{ fontFamily: "ui-monospace,Menlo,monospace", fontSize: 11, color: "rgba(255,255,255,0.68)", display: "flex", alignItems: "center", gap: 4 }}>
           <CommandIcon size={12}/> ↵
         </span>
         <button type="submit" style={{ background: "linear-gradient(135deg,#491cff,#ff99d4)", color: "#fff", border: "none", borderRadius: 10, padding: "8px 16px", cursor: "pointer", fontSize: 13, fontWeight: 700, fontFamily: "inherit", display: "inline-flex", alignItems: "center", gap: 6 }}>
@@ -570,19 +607,22 @@ const BoldVibeProtos = () => (
       <SectionKicker rule={false}>Prototypes</SectionKicker>
       <span style={{ fontFamily: "ui-monospace,Menlo,monospace", fontSize: 12, color: "rgba(255,255,255,0.6)" }}>design meets engineering the moment an idea lands</span>
     </div>
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }} className="bp-vibe-grid">
+    <div className="bp-vibe-rail" style={{ display: "flex", gap: 20, overflowX: "auto", scrollSnapType: "x mandatory", paddingBottom: 14, scrollbarWidth: "thin", scrollbarColor: "rgba(167,143,255,0.4) transparent" }}>
       {VIBE_PROTOS.map((p, i) => (
-        <div key={i} style={{ borderRadius: 16, overflow: "hidden", border: "1px solid rgba(167,143,255,0.22)", background: "rgba(40,40,52,0.7)", display: "flex", flexDirection: "column" }}>
-          <div style={{ aspectRatio: "16 / 10", background: "rgba(22,22,30,0.6)", position: "relative", overflow: "hidden" }}>
+        <div key={i} className="bp-vibe-card" style={{ flex: "0 0 auto", width: "70%", scrollSnapAlign: "start", borderRadius: 16, overflow: "hidden", border: "1px solid rgba(167,143,255,0.22)", background: "rgba(40,40,52,0.7)", display: "flex", flexDirection: "column" }}>
+          <div style={{ aspectRatio: "16 / 9", background: "rgba(22,22,30,0.6)", position: "relative", overflow: "hidden" }}>
             <VibeMedia p={p} />
           </div>
-          <div style={{ padding: "16px 18px", display: "flex", flexDirection: "column", gap: 6 }}>
+          <div style={{ padding: "18px 22px", display: "flex", flexDirection: "column", gap: 7 }}>
             <span style={{ fontFamily: "ui-monospace,Menlo,monospace", fontSize: 10, color: "#b9a6ff", background: "rgba(73,28,255,0.15)", border: "1px solid rgba(167,143,255,0.3)", borderRadius: 6, padding: "2px 8px", alignSelf: "flex-start", textTransform: "uppercase", letterSpacing: 0.8 }}>{p.tool}</span>
-            <span style={{ fontSize: 16, fontWeight: 800, color: "#fff", lineHeight: 1.25 }}>{p.title}</span>
+            <span style={{ fontSize: 18, fontWeight: 800, color: "#fff", lineHeight: 1.25 }}>{p.title}</span>
             <span style={{ fontSize: 14, color: "rgba(255,255,255,0.78)", lineHeight: 1.5 }}>{p.desc}</span>
           </div>
         </div>
       ))}
+    </div>
+    <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 6, fontFamily: "ui-monospace,Menlo,monospace", fontSize: 12, color: "rgba(255,255,255,0.78)", letterSpacing: 1, fontWeight: 600 }}>
+      <span>scroll for more</span><span aria-hidden style={{ fontSize: 14 }}>→</span>
     </div>
   </div>
 );
@@ -641,7 +681,7 @@ const BoldAgentDock = () => {
 };
 
 const BoldHeroStats = () => (
-  <div className="bp-stats" style={{ maxWidth: 1100, margin: "48px auto 0", display: "flex", flexDirection: "column", gap: 16 }}>
+  <div className="bp-stats" style={{ maxWidth: 1100, margin: "0 auto", display: "flex", flexDirection: "column", gap: 16 }}>
     {/* Top row — 3 hero numbers */}
     <div className="bp-stats-row1" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }}>
       {[
@@ -667,8 +707,7 @@ const EXPERTISE = [
   { t: "Vibe Coding", d: "prototypes as spec" },
 ];
 const BoldExpertise = () => (
-  <section className="bp-section bp-expertise" style={{ position: "relative", zIndex: 1, padding: "8px 32px 40px", maxWidth: 1100, margin: "0 auto" }}>
-    <div style={{ marginBottom: 20 }}>
+  <section className="bp-section bp-expertise" style={{ position: "relative", zIndex: 1, padding: "8px 32px 40px", maxWidth: 1280, margin: "0 auto" }}>    <div style={{ marginBottom: 20 }}>
       <SectionKicker>Design expertise</SectionKicker>
     </div>
     <div className="bp-expertise-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 14 }}>
@@ -685,7 +724,7 @@ const BoldExpertise = () => (
 
 // ─── ABOUT ──────────────────────────────────────────────────────────────
 const BoldAbout = () => (
-  <section id="about" className="bp-section bp-about" style={{ position: "relative", zIndex: 1, padding: "96px 32px", maxWidth: 1100, margin: "0 auto" }}>
+  <section id="about" className="bp-section bp-about" style={{ position: "relative", zIndex: 1, padding: "96px 32px", maxWidth: 1280, margin: "0 auto" }}>
     <div aria-hidden style={{
       position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)",
       width: "100vw", height: "100%", zIndex: -1, overflow: "hidden", pointerEvents: "none",
@@ -765,7 +804,7 @@ const SectionKicker = ({ children, rule = true }) => (
 
 // ─── NOW ────────────────────────────────────────────────────────────────
 const BoldNow = () => (
-  <section id="now" className="bp-section" style={{ position: "relative", zIndex: 1, padding: "64px 32px", maxWidth: 1000, margin: "0 auto" }}>
+  <section id="now" className="bp-section" style={{ position: "relative", zIndex: 1, padding: "64px 32px", maxWidth: 1280, margin: "0 auto" }}>
     <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 24 }}>
       <SectionKicker rule={false}>02 · now</SectionKicker>
       <span style={{ fontFamily: "ui-monospace,Menlo,monospace", fontSize: 11, color: "rgba(255,255,255,0.6)" }}>
@@ -800,7 +839,7 @@ const BoldNow = () => (
 
 // ─── TOOLKIT ──────────────────────────────────────────────────────────────
 const BoldToolkit = () => (
-  <section id="toolkit" className="bp-section" style={{ position: "relative", zIndex: 1, padding: "64px 32px", maxWidth: 1100, margin: "0 auto" }}>
+  <section id="toolkit" className="bp-section" style={{ position: "relative", zIndex: 1, padding: "64px 32px", maxWidth: 1280, margin: "0 auto" }}>
     <SectionKicker>03 · vibe coding toolkit</SectionKicker>
     <h2 style={{ fontSize: 42, fontWeight: 900, letterSpacing: -1, marginTop: 10, marginBottom: 8, color: "#ffffff" }}>AI-fluent design isn't a buzzword. It's my workbench.</h2>
     <p style={{ fontSize: 18, color: "rgba(255,255,255,0.82)", lineHeight: 1.6, marginBottom: 28, maxWidth: "none" }}>
@@ -890,51 +929,55 @@ const BoldWork = () => {
           <h2 style={{ fontSize: 42, fontWeight: 900, letterSpacing: -1, marginTop: 10, color: "#ffffff" }}>Six case studies.</h2>
         </div>
       </div>
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px", display: "flex", flexDirection: "column", gap: 20 }}>
-        <BoldFeatureCase c={featured} featured/>
-        {rest.map(c => <BoldFeatureCase key={c.slug} c={c} />)}
+      <div className="bp-work-cards" style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px", display: "flex", flexDirection: "column", gap: 56 }}>
+        <BoldFeatureCase c={featured} featured i={0}/>
+        {rest.map((c, i) => <BoldFeatureCase key={c.slug} c={c} i={i + 1} />)}
       </div>
     </section>
   );
 };
-const BoldFeatureCase = ({ c, featured }) => {
+const BoldFeatureCase = ({ c, featured, i }) => {
   const isComingSoon = c.slug === "experimentation";
+  const flip = i % 2 === 1;
   return (
   <div
     className="bp-feature"
     onClick={() => { if (!isComingSoon) openCase(c); }}
     style={{
-      border: "1px solid rgba(167,143,255,0.22)", borderRadius: 24, overflow: "hidden",
+      border: "1px solid rgba(167,143,255,0.16)", borderRadius: 28, overflow: "hidden",
       cursor: isComingSoon ? "default" : "pointer",
-      background: "#1c1c26", transition: "border-color .2s, transform .2s",
-      display: "grid", gridTemplateColumns: "minmax(0,42%) 1fr", alignItems: "stretch",
+      background: "rgba(34,34,46,0.72)", transition: "border-color .25s, transform .25s, box-shadow .25s",
+      display: "flex", flexDirection: "column",
     }}
-    onMouseEnter={e => { if (!isComingSoon) { e.currentTarget.style.borderColor = "rgba(167,143,255,0.6)"; e.currentTarget.style.transform = "translateY(-4px)"; } }}
-    onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(167,143,255,0.22)"; e.currentTarget.style.transform = "translateY(0)"; }}>
-    <div className="bp-feature-body" style={{ padding: "48px 44px", display: "flex", flexDirection: "column", gap: 14, justifyContent: "center" }}>
-      <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-        <span style={{ fontFamily: "ui-monospace,Menlo,monospace", fontSize: 11, color: "rgba(255,255,255,0.55)" }}>{c.year} · {c.company}</span>
+    onMouseEnter={e => { if (!isComingSoon) { e.currentTarget.style.borderColor = "rgba(167,143,255,0.55)"; e.currentTarget.style.transform = "translateY(-5px)"; e.currentTarget.style.boxShadow = "0 26px 60px rgba(0,0,0,0.45)"; } }}
+    onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(167,143,255,0.16)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
+    <div className="bp-feature-body" style={{ padding: "36px 46px 42px", display: "flex", flexDirection: "column", gap: 14, order: 2 }}>
+      <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+        <span style={{ fontFamily: "ui-monospace,Menlo,monospace", fontSize: 11, color: "rgba(255,255,255,0.6)", letterSpacing: 0.6 }}>{c.year} · {c.company}</span>
         {(featured || c.slug === "pulse-nexio") && <span style={{ fontFamily: "ui-monospace,Menlo,monospace", fontSize: 10, fontWeight: 700, letterSpacing: 0.8, textTransform: "uppercase", color: "#1c1c26", background: "#ff99d4", borderRadius: 6, padding: "3px 8px" }}>Featured</span>}
       </div>
-      <h3 style={{ fontSize: 34, fontWeight: 900, lineHeight: 1.1, letterSpacing: -1, color: "#ffffff", margin: 0 }}>{c.title}</h3>
-      <p style={{ fontSize: 15.5, color: "rgba(255,255,255,0.74)", lineHeight: 1.6, margin: 0 }}>{c.blurb}</p>
+      <h3 style={{ fontSize: featured ? 42 : 36, fontWeight: 900, lineHeight: 1.08, letterSpacing: -1.4, color: "#ffffff", margin: 0 }}>{c.title}</h3>
+      <p style={{ fontSize: 16, color: "rgba(255,255,255,0.76)", lineHeight: 1.62, margin: 0, textWrap: "pretty" }}>{c.blurb}</p>
       {c.tags && c.tags.length > 0 && (
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 2 }}>
-          {c.tags.slice(0, 2).map(t => (
-            <span key={t} style={{ fontFamily: "ui-monospace,Menlo,monospace", fontSize: 10.5, fontWeight: 700, letterSpacing: 0.4, textTransform: "uppercase", color: "#d9c9ff", background: "rgba(167,143,255,0.14)", border: "1px solid rgba(167,143,255,0.3)", borderRadius: 999, padding: "5px 11px" }}>{t}</span>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 2, fontFamily: "ui-monospace,Menlo,monospace", fontSize: 10.5, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", color: "#b9a6ff" }}>
+          {c.tags.slice(0, 2).map((t, k) => (
+            <React.Fragment key={t}>
+              {k > 0 && <span style={{ color: "rgba(255,255,255,0.45)" }}>·</span>}
+              <span>{t}</span>
+            </React.Fragment>
           ))}
         </div>
       )}
       {isComingSoon
-        ? <span style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "rgba(255,255,255,0.5)", fontSize: 14, fontWeight: 700, marginTop: 6 }}>Coming soon</span>
-        : <span style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "#ff99d4", fontSize: 14, fontWeight: 700, marginTop: 6 }}>View case study <ArrowIcon size={13}/></span>}
+        ? <span style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "rgba(255,255,255,0.68)", fontSize: 14, fontWeight: 700, marginTop: 8 }}>Coming soon</span>
+        : <span style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "#ff99d4", fontSize: 14.5, fontWeight: 700, marginTop: 8 }}>View case study <ArrowIcon size={13}/></span>}
     </div>
-    <div className="bp-feature-mock" style={{ background: c.accent, position: "relative", overflow: "hidden", minHeight: 360, display: "flex", alignItems: "center", justifyContent: "center", padding: c.hero ? 0 : 24 }}>
+    <div className="bp-feature-mock" style={{ background: c.accent, position: "relative", overflow: "hidden", aspectRatio: c.slug === "pulse-nexio" ? "22 / 15" : "16 / 9", width: "100%", display: "flex", alignItems: "center", justifyContent: "center", order: 1 }}>
       {c.slug === "recommendations-engine" && (
         <span style={{ position: "absolute", top: 12, left: 12, right: 12, zIndex: 2, fontFamily: "ui-monospace,Menlo,monospace", fontSize: 10.5, fontWeight: 800, letterSpacing: 0.5, textTransform: "uppercase", color: "#1c1c26", background: "#ffd84d", border: "1px solid rgba(0,0,0,0.2)", boxShadow: "0 6px 18px rgba(0,0,0,0.35)", borderRadius: 8, padding: "7px 11px", textAlign: "center", lineHeight: 1.35 }}>Case study being updated · designs coming soon</span>
       )}
       {c.hero
-        ? <img src={c.hero} alt={c.title} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "left center", display: "block" }}/>
+        ? <img src={c.hero} alt={c.title} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "contain", objectPosition: "center", display: "block" }}/>
         : <BoldMiniMock slug={c.slug}/>}
     </div>
   </div>
@@ -962,7 +1005,7 @@ const BoldCase = ({ c }) => (
     </div>
     <div className="bp-case-body" style={{ padding: "22px 24px", display: "flex", flexDirection: "column", gap: 9 }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10 }}>
-        <span style={{ fontFamily: "ui-monospace,Menlo,monospace", fontSize: 10.5, color: "rgba(255,255,255,0.55)" }}>{c.year} · {c.company}</span>
+        <span style={{ fontFamily: "ui-monospace,Menlo,monospace", fontSize: 10.5, color: "rgba(255,255,255,0.68)" }}>{c.year} · {c.company}</span>
         <span style={{ fontFamily: "ui-monospace,Menlo,monospace", fontSize: 10, fontWeight: 700, letterSpacing: 0.8, textTransform: "uppercase", color: "#ff99d4" }}>{c.slug === "experimentation" ? "Coming soon" : c.tags[0]}</span>
       </div>
       <h3 style={{ fontSize: 20, fontWeight: 900, lineHeight: 1.2, letterSpacing: -0.4, color: "#ffffff", margin: 0 }}>{c.title}</h3>
@@ -1005,7 +1048,7 @@ const BoldFooter = () => (
         <a href="assets/Aditya-Yellamraju-Resume.pdf" onClick={() => track("resume_download")} target="_blank" rel="noopener" download="Aditya-Yellamraju-Resume.pdf" style={{ display: "inline-flex", alignItems: "center", gap: 10, border: "1.5px solid rgba(255,255,255,0.25)", color: "rgba(255,255,255,0.85)", fontSize: 15, fontWeight: 600, padding: "13px 24px", borderRadius: 100, textDecoration: "none" }}><DownloadIcon size={14}/> Résumé</a>
       </div>
     </div>
-    <div className="bp-footer-meta" style={{ display: "flex", justifyContent: "space-between", marginTop: 32, fontFamily: "ui-monospace,Menlo,monospace", fontSize: 12, color: "rgba(255,255,255,0.55)" }}>
+    <div className="bp-footer-meta" style={{ display: "flex", justifyContent: "space-between", marginTop: 32, fontFamily: "ui-monospace,Menlo,monospace", fontSize: 12, color: "rgba(255,255,255,0.68)" }}>
       <span>© 2026 · aditya yellamraju · handcrafted, then robot-polished</span>
       <span>no designers were replaced in the making of this site</span>
     </div>
