@@ -516,7 +516,7 @@ const BoldBubble = ({ role, text }) => (
 // ─── VIBE-CODING PROTOTYPES ───────────────────────────────────────────
 const VIBE_PROTOS = [
   { clips: ["assets/vibe/proto-1a.webm", "assets/vibe/proto-1b.webm", "assets/vibe/proto-1c.webm"], title: "Salesforce Personalization Campaign", tool: "Claude + Cursor", desc: "The core configuration platform, reimagined marketer-friendly — prototyped and clickable, not static frames." },  { src: "assets/vibe/proto-2.gif", title: "Agentic Web Content Personalization", tool: "Cursor", clips: ["assets/vibe/proto-2a.webm", "assets/vibe/proto-2b.webm", "assets/vibe/proto-2c.webm"], desc: "The platform applied to a conversational, agentic marketing use case — live and navigable." },
-  { src: "assets/vibe/proto-3.gif", title: "Agentic Recommendation Filters Creation", tool: "Claude Code", desc: "Part of the recommendations engine — building catalog filters through a natural-language agent." },
+  { clips: ["assets/vibe/proto-3a.webm", "assets/vibe/proto-3b.webm", "assets/vibe/proto-3c.webm"], title: "Agentic Recommendation Filters Creation", tool: "Claude Code", desc: "Part of the recommendations engine — building catalog filters through a natural-language agent." },
 ];
 const VibeMedia = ({ p }) => {
   const [idx, setIdx] = React.useState(0);
