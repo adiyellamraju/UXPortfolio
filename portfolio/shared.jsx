@@ -51,6 +51,7 @@ const CASES = [
     impact: "Turned a deeply technical setup — filter rules and recommender config that once required Professional Services — into a marketer-friendly, self-serve conversation.",
     outcome: "Filter rules and recommender setup that previously required Professional Services, now self-serve.",
     accent: "linear-gradient(145deg, #1a0633 0%, #3a0f6a 55%, #491cff 100%)",
+    hero: "portfolio/case-assets/recs/hero-simulate.png",
   },
   {
     slug: "pulse-nexio",

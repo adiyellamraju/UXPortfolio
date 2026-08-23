@@ -103,14 +103,14 @@
     /* CONTENT */
     .cs-content { width: 80%; max-width: 1700px; margin: 0 auto; padding: 80px 0 120px; position: relative; z-index: 1; }
 
-    .cs-section { padding: 80px 0 0; display: grid; grid-template-columns: 280px 1fr; gap: 64px; border-top: 1px solid var(--border-soft); margin-top: 80px; }
+    .cs-section { padding: 80px 0 0; display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 64px; border-top: 1px solid var(--border-soft); margin-top: 80px; }
     .cs-section:first-child { border-top: none; margin-top: 0; padding-top: 0; }
 
     .cs-section-label { display: flex; flex-direction: column; gap: 8px; padding-top: 4px; position: sticky; top: 110px; align-self: start; }
     .cs-section-num { font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: #b9a6ff; }
     .cs-section-title { font-size: 22px; font-weight: 900; color: #fff; line-height: 1.2; }
 
-    .cs-section-body { display: flex; flex-direction: column; gap: 24px; }
+    .cs-section-body { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
     .cs-section-body h3 { font-size: 28px; font-weight: 900; color: #fff; line-height: 1.2; letter-spacing: -0.4px; }
     .cs-section-body p { font-size: 18px; font-weight: 400; color: var(--text-mid); line-height: 1.75; }
     .cs-section-body p strong { color: #fff; font-weight: 700; }
@@ -175,6 +175,42 @@
     .cs-placeholder-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     @media (max-width: 720px) { .cs-placeholder-grid { grid-template-columns: 1fr; } }
 
+    .cs-hero-figure { max-width: 1440px; margin: 0 auto; padding: 56px 64px 0; position: relative; z-index: 2; }
+
+    /* WIZARD HORIZONTAL SCROLL */
+    .wizard-scroll { position: relative; height: 900vh; margin-top: 24px; }
+    .wizard-sticky { position: sticky; top: 72px; height: calc(100vh - 96px); overflow: hidden; display: flex; flex-direction: column; justify-content: center; gap: 18px; }
+    .wizard-track { display: flex; gap: 40px; align-items: center; will-change: transform; transition: transform 0.08s linear; }
+    .wizard-slide { flex: 0 0 100%; display: flex; flex-direction: column; gap: 16px; }
+    .wizard-img { width: 100%; border-radius: 14px; overflow: hidden; border: 1px solid var(--border-soft); background: #0d0d14; box-shadow: 0 30px 80px rgba(0,0,0,0.4); }
+    .wizard-img img { width: 100%; max-height: 68vh; object-fit: contain; display: block; }
+    .wizard-cap { font-size: 15px; color: var(--text-mid); line-height: 1.6; max-width: 760px; }
+    .wizard-cap strong { color: #fff; }
+    .wizard-dots { display: flex; gap: 8px; justify-content: center; }
+    .wizard-dots span { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); transition: background 0.2s, transform 0.2s; }
+    .wizard-dots span.active { background: #ff99d4; transform: scale(1.3); }
+    @media (max-width: 768px) {
+      .wizard-scroll { height: auto; }
+      .wizard-sticky { position: static; height: auto; overflow: visible; }
+      .wizard-track { flex-direction: column; transform: none !important; gap: 28px; }
+      .wizard-slide { flex: none; }
+      .wizard-img img { max-height: none; }
+      .wizard-dots { display: none; }
+    }
+
+    /* CLIPS */
+    .cs-clip-stack { display: flex; flex-direction: column; gap: 32px; margin-top: 28px; }
+    .cs-clip { margin: 0; }
+    .cs-clip .cs-clip-crop { display: block; width: 100%; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border-mid); background: #f4f4f7; }
+    .cs-clip .cs-clip-crop video { display: block; width: 100%; height: auto; aspect-ratio: 1600 / 700; object-fit: cover; border: 0; border-radius: 0; }
+    .cs-clip video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: var(--radius); border: 1px solid var(--border-mid); background: #f4f4f7; }
+    .cs-clip figcaption { font-size: 14px; color: var(--text-faint); line-height: 1.55; margin-top: 10px; }
+
+    /* FIGURE */
+    .cs-figure { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border-mid); background: #f4f4f7; }
+    .cs-figure img { display: block; width: 100%; height: auto; }
+    .cs-figure-cap { font-size: 14px; color: var(--text-faint); line-height: 1.55; margin-top: 10px; }
+
     /* PROBLEM/PRINCIPLE GRID */
     .cs-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     @media (max-width: 720px) { .cs-grid-2 { grid-template-columns: 1fr; } }
@@ -203,9 +239,10 @@
       .cs-hero { padding: 140px 40px 64px; }
       .cs-parent-link { padding: 24px 40px; }
       .cs-content { width: auto; padding: 64px 40px 80px; }
-      .cs-section { grid-template-columns: 1fr; gap: 24px; }
+      .cs-section { grid-template-columns: minmax(0, 1fr); gap: 24px; }
       .cs-section-label { position: static; flex-direction: row; align-items: center; gap: 16px; }
       .cs-footer-cta { padding: 56px 40px; }
+      .cs-hero-figure { padding: 40px 40px 0; }
     }
     @media (max-width: 768px) {
       .cs-hero { padding: 120px 24px 56px; }
@@ -215,6 +252,7 @@
       .cs-stat-value { font-size: 26px; }
       nav a { font-size: 13px; padding: 7px 12px; }
       .cs-footer-cta { padding: 48px 24px; }
+      .cs-hero-figure { padding: 32px 24px 0; }
       h2 { font-size: 28px !important; letter-spacing: -0.6px !important; }
       h3 { font-size: 20px !important; }
     }
@@ -222,6 +260,7 @@
       .cs-hero { padding: 100px 16px 48px; }
       .cs-parent-link { padding: 16px; }
       .cs-content { padding: 40px 16px 48px; }
+      .cs-hero-figure { padding: 24px 16px 0; }
       .cs-tag { font-size: 10px; padding: 4px 10px; }
       .cs-hero-sub { font-size: 16px; }
       nav { padding: 12px 12px; gap: 6px; flex-wrap: nowrap; max-width: calc(100vw - 24px); }
@@ -288,10 +327,15 @@
   </section>
   <div class="hero-stripe"></div>
 
-  <!-- WIP BANNER -->
-  <div style="background:#ffd84d; color:#1c1c26; padding:14px 24px; text-align:center; font-family:ui-monospace,Menlo,monospace; font-size:13px; font-weight:800; letter-spacing:0.4px; text-transform:uppercase; position:relative; z-index:2;">
-    Case study being updated · design images coming soon
+  <!-- HERO FIGURE -->
+  <div class="cs-hero-figure">
+    <div class="cs-figure">
+      <img src="assets/case-studies/recs/hero-simulate.png" alt="Simulate step of the recommender setup — profile explorer on the left, live recommendation preview on the right" />
+    </div>
+    <p class="cs-figure-cap">The payoff: pick a real profile, hit Simulate, and see exactly what that person would be shown — before anything ships.</p>
   </div>
+
+
 
   <!-- PARENT LINK STRIP -->
   <div class="cs-parent-link">
@@ -410,37 +454,86 @@
             <span class="cs-mini-card-body">When the engine made a recommendation, marketers couldn't see why. No preview, no explanation, no way to course-correct. AI without auditability is AI marketers won't ship.</span>
           </div>
         </div>
+
+        <div class="cs-figure" style="margin-top:28px;">
+          <img src="assets/case-studies/recs/before-01-rule-config.png" alt="Rule-Based Recommender Configuration modal — Calculated Insight, Sort measure, and Sort Order fields with a help panel on the right" />
+        </div>
+        <p class="cs-figure-cap">Rule-based recommender setup. Three dropdowns named after the data model — "Calculated Insight," "Sort measure" — and a help panel doing the explaining the form couldn't.</p>
+
+        <div class="cs-figure" style="margin-top:28px;">
+          <img src="assets/case-studies/recs/before-02-filters.png" alt="Filters modal — Include/Exclude tabs with nested resource, type, operator rows and a WHERE clause containing metric and dimension conditions" />
+        </div>
+        <p class="cs-figure-cap">The filter builder. Resource, Type, Operator, Profile DG Resource, then a nested WHERE clause underneath — a query language rendered as form fields, with no preview of what it actually matched.</p>
       </div>
     </div>
-
-    <!-- 03 What I designed — Surface 1 -->
     <div class="cs-section">
       <div class="cs-section-label">
         <span class="cs-section-num">03</span>
-        <h2 class="cs-section-title">Surface 01 — Catalog Filters</h2>
+        <h2 class="cs-section-title">Recommender Configuration, End to End</h2>
       </div>
       <div class="cs-section-body">
-        <div class="cs-surface">
-          <div class="cs-surface-head">
-            <span class="cs-surface-num">Surface 01</span>
-            <span class="cs-surface-pill">Configuration</span>
-          </div>
-          <h3>Complex filters to scope items, products, and content — without writing a query.</h3>
-          <p class="cs-surface-lede">
-            A visual filter builder that handles <strong>nested groups, mixed AND/OR logic, dynamic value pickers</strong> (resolved against the live catalog), inventory-aware operators, and reusable saved filter sets. Marketers can build the kind of scoping logic that previously required engineering — and read it back out as something that looks like a sentence, not a query plan.
-          </p>
-          <ul class="cs-surface-bullets">
-            <li>Nested AND/OR groups with clear visual hierarchy</li>
-            <li>Catalog-aware value pickers — typeahead from real fields, not free-text</li>
-            <li>Live count: "Matches 2,431 of 18,920 items" as you build</li>
-            <li>Inline preview drawer — see exactly which items qualify</li>
-            <li>Reusable saved filter sets — share across recommenders</li>
-            <li>Diff view when a filter is edited mid-campaign</li>
-          </ul>
+        <h3>The configuration flow, end to end</h3>
+        <p>Every "customers also bought" strip, every "recommended for you" row, every product suggestion in an email starts as a configuration decision someone has to make. Salesforce describes the outcome in three words — collaborative filtering, content-based, hybrid — but a marketer setting one up has to answer harder questions: which data does this draw from, which of the three approaches fits the goal, which slice of a 65,000-item catalog is even eligible, and will the output hold up before it reaches a real customer. This flow is where those answers get made. Five steps, each one question, ending in a simulation against a real profile so nothing ships on faith.</p>
+        <h4 style="font-size:15px;letter-spacing:0.02em;text-transform:uppercase;color:#b9a6ff;margin:26px 0 10px;">The same spine, reused</h4>
+        <p>This flow isn't a new pattern. It's the guided setup pattern I established for Personalization Campaigns, applied to a completely different object. Campaigns asked Where → What → Who → How; recommenders ask Data → Type → Objective → Filters → Review. Different questions, identical scaffolding: one decision per step, a persistent left rail that shows where you are and what's left, defaults pre-filled from admin settings, guidance in the rail rather than a separate tab, and a review table before anything commits.</p>
+        <p>That reuse was the test of the pattern. A configuration spine built for one object turned out to hold for another with a different data model, a different persona mix, and an ML step in the middle — which is what made it worth standardizing rather than treating as a one-off screen design.</p>
+        <div class="cs-callout">
+          <strong>Consistency &amp; standards.</strong> A marketer who has configured a campaign already knows how to configure a recommender. The chrome, the step rhythm, the rail, and the commit moment are the same, so the only thing new to learn is the subject matter — not the interface.<br><br>
+          <strong>Recognition over recall.</strong> Nothing asks the user to remember a value from three steps back. Every choice stays visible in the rail, filters render as editable rows instead of a saved query string, and the review table restates the whole configuration in place. The system carries the state; the marketer just reads it.
         </div>
-        <div class="cs-placeholder tall">
-          <span class="cs-placeholder-tag">Visual coming</span>
-          <span class="cs-placeholder-text">Catalog filter builder — nested rule groups, live match count, item preview drawer.</span>
+        <p style="color: var(--text-muted); font-style: italic; margin-bottom: 4px;">Scroll to walk through it — entry, Data, Recommender Type, Filters, Review, and Simulate.</p>
+        <div class="wizard-scroll" id="recsScroll">
+          <div class="wizard-sticky">
+            <div class="wizard-track" id="recsTrack">
+              <figure class="wizard-slide">
+                <div class="wizard-img"><img src="assets/case-studies/recs/flow-00-intro.png" alt="Guided setup entry modal explaining what a personalization recommender does"></div>
+                <figcaption class="wizard-cap"><strong>Step 00 · Entry</strong> — A modal, not a blank form. Two sentences on what this produces and a single primary action. The old flow dropped you straight into field names.</figcaption>
+              </figure>
+              <figure class="wizard-slide">
+                <div class="wizard-img"><img src="assets/case-studies/recs/flow-01-data.png" alt="Data step — Data Space, Profile Data Graph, Item Data Graph, and a fallback recommender toggle"></div>
+                <figcaption class="wizard-cap"><strong>Step 01 · Data</strong> — Three data selections, all pre-filled with the admin’s defaults, plus a fallback recommender so the surface never renders empty. Failure states are a setup decision, not an incident.</figcaption>
+              </figure>
+              <figure class="wizard-slide">
+                <div class="wizard-img"><img src="assets/case-studies/recs/flow-02-type.png" alt="Recommender Type step showing two cards — Objective-Based and Rule-Based"></div>
+                <figcaption class="wizard-cap"><strong>Step 02 · Recommender Type</strong> — Two cards instead of a strategy dropdown. Each states what it uses and what it decides, so the choice is legible without knowing the ML vocabulary underneath.</figcaption>
+              </figure>
+              <figure class="wizard-slide">
+                <div class="wizard-img"><img src="assets/case-studies/recs/flow-03-objective.png" alt="Objective-Based selected, revealing an objective picker set to Maximize Revenue with an explanatory callout"></div>
+                <figcaption class="wizard-cap"><strong>Step 03 · Objective</strong> — Pick the outcome, not the algorithm. Selecting an objective reveals a plain-language description of the behavior it will drive — the machine learning stays inside.</figcaption>
+              </figure>
+              <figure class="wizard-slide">
+                <div class="wizard-img"><img src="assets/case-studies/recs/flow-04-filters-empty.png" alt="Filters step with a natural-language input above the manual Include/Exclude builder"></div>
+                <figcaption class="wizard-cap"><strong>Step 04 · Filters</strong> — The natural-language field sits above the manual builder, not instead of it. Both paths lead to the same rule set.</figcaption>
+              </figure>
+              <figure class="wizard-slide">
+                <div class="wizard-img"><img src="assets/case-studies/recs/flow-05-filters-prompt.png" alt="A typed natural-language filter request with the builder showing a generating state"></div>
+                <figcaption class="wizard-cap"><strong>Step 05 · Filters · prompt</strong> — One sentence: blue, under $135, never purchased. A skeleton state makes the generation visible rather than blocking.</figcaption>
+              </figure>
+              <figure class="wizard-slide">
+                <div class="wizard-img"><img src="assets/case-studies/recs/flow-06-filters-generated.png" alt="The generated filter rendered as three editable Resource / Type / Operator / Value rows"></div>
+                <figcaption class="wizard-cap"><strong>Step 06 · Filters · generated</strong> — The result lands as real, editable rows — not an opaque saved query. The prompt is echoed above as a Generated Filter banner, so the marketer can see what the agent understood and correct it.</figcaption>
+              </figure>
+              <figure class="wizard-slide">
+                <div class="wizard-img"><img src="assets/case-studies/recs/flow-07-review.png" alt="Review & Save step with name, description, and a recommender details table"></div>
+                <figcaption class="wizard-cap"><strong>Step 07 · Review & Save</strong> — Everything the marketer chose, restated in one table before commit. The primary action says exactly what happens next: Save & Start Model Training.</figcaption>
+              </figure>
+              <figure class="wizard-slide">
+                <div class="wizard-img"><img src="assets/case-studies/recs/flow-08-created.png" alt="Success dialog confirming the recommender was created and training has started"></div>
+                <figcaption class="wizard-cap"><strong>Step 08 · Confirmation</strong> — The dialog names the next step and where to find it, instead of a generic success toast.</figcaption>
+              </figure>
+              <figure class="wizard-slide">
+                <div class="wizard-img"><img src="assets/case-studies/recs/flow-09-training.png" alt="Recommender detail page showing status In Training with the Simulate action disabled"></div>
+                <figcaption class="wizard-cap"><strong>Step 09 · Training</strong> — Status is In Training and Simulate is deliberately disabled. The system tells the truth about what it can and cannot do yet.</figcaption>
+              </figure>
+              <figure class="wizard-slide">
+                <div class="wizard-img"><img src="assets/case-studies/recs/01-simulate.png" alt="Simulate step — profile explorer on the left, live recommendation preview on the right"></div>
+                <figcaption class="wizard-cap"><strong>Step 10 · Simulate</strong> — Pick a real profile, set an anchor item, and see exactly what that person would be shown. The step that turns a configuration into something you can defend.</figcaption>
+              </figure>
+            </div>
+            <div class="wizard-dots" id="recsDots">
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -449,12 +542,12 @@
     <div class="cs-section">
       <div class="cs-section-label">
         <span class="cs-section-num">04</span>
-        <h2 class="cs-section-title">Surface 02 — Agentic NL Filters</h2>
+        <h2 class="cs-section-title">Agentic NL Filters</h2>
       </div>
       <div class="cs-section-body">
         <div class="cs-surface">
           <div class="cs-surface-head">
-            <span class="cs-surface-num">Surface 02</span>
+            
             <span class="cs-surface-pill ai">AI · Natural language</span>
           </div>
           <h3>Describe the filter in plain English — the agent builds the rules.</h3>
@@ -470,14 +563,29 @@
             <li>Auditable — every agent action shows up in the campaign history</li>
           </ul>
         </div>
-        <div class="cs-placeholder-grid">
-          <div class="cs-placeholder">
-            <span class="cs-placeholder-tag">Visual coming</span>
-            <span class="cs-placeholder-text">Agent chat translating an NL prompt into a filter graph, with the visual builder updating in real time.</span>
+        <div class="cs-clip-stack">
+          <figure class="cs-clip">
+            <div class="cs-clip-crop">
+              <video data-src="assets/case-studies/recs/nl-cropped.webm" muted loop playsinline preload="none"></video>
+            </div>
+            <figcaption>The full agentic filter walkthrough — prompt, refinement, and catalog-grounded suggestions in one pass.</figcaption>
+          </figure>
+        </div>
+        <div class="cs-grid-2" style="margin-top:28px;">
+          <div class="cs-mini-card">
+            <span class="cs-mini-card-tag">Feature 01</span>
+            <span class="cs-mini-card-title">Prompt to filter graph</span>
+            <span class="cs-mini-card-body">The marketer describes the audience in plain language; the agent proposes the clauses and populates the visual builder underneath.</span>
           </div>
-          <div class="cs-placeholder">
-            <span class="cs-placeholder-tag">Visual coming</span>
-            <span class="cs-placeholder-text">Ambiguity-resolution dialog — agent asking a clarifying question grounded in the catalog schema.</span>
+          <div class="cs-mini-card">
+            <span class="cs-mini-card-tag">Feature 02</span>
+            <span class="cs-mini-card-title">Iterative refinement</span>
+            <span class="cs-mini-card-body">Each follow-up narrows the set without starting over, and every clause the agent writes stays editable by hand.</span>
+          </div>
+          <div class="cs-mini-card">
+            <span class="cs-mini-card-tag">Feature 03</span>
+            <span class="cs-mini-card-title">Grounded in the catalog</span>
+            <span class="cs-mini-card-body">The agent only offers fields and values that exist in the customer's data, so a suggestion can never fail at runtime.</span>
           </div>
         </div>
       </div>
@@ -487,12 +595,12 @@
     <div class="cs-section">
       <div class="cs-section-label">
         <span class="cs-section-num">05</span>
-        <h2 class="cs-section-title">Surface 03 — Agentic Recommender Setup</h2>
+        <h2 class="cs-section-title">Agentic Recommender Setup</h2>
       </div>
       <div class="cs-section-body">
         <div class="cs-surface">
           <div class="cs-surface-head">
-            <span class="cs-surface-num">Surface 03</span>
+            
             <span class="cs-surface-pill ai">AI · Agent-led setup</span>
           </div>
           <h3>An agent walks the marketer from goal → strategy → working recommender.</h3>
@@ -508,10 +616,15 @@
             <li>Hand-off to the visual configuration core when the marketer wants to dig in</li>
           </ul>
         </div>
-        <div class="cs-placeholder tall">
-          <span class="cs-placeholder-tag">Visual coming</span>
-          <span class="cs-placeholder-text">Agent-led recommender setup — conversation, reasoning sidebar, and a live decisioning preview against sample visitor profiles.</span>
+        <div class="cs-figure" style="margin-top:28px;">
+          <img src="assets/case-studies/recs/agent-01-created.png" alt="Agentforce panel docked beside the Personalization home page, showing a created recommender summary card with objective, data graphs, and filters, plus recommended next actions" />
         </div>
+        <p class="cs-figure-cap">The agent builds the recommender and hands back a summary card — objective, data space, both data graphs, and the filters it applied. "Add to Decision" and "Edit" sit right on the card, so the marketer can ship it or open it up. Below, suggested next moves keep the conversation going instead of leaving a blank prompt.</p>
+
+        <div class="cs-figure" style="margin-top:28px;">
+          <img src="assets/case-studies/recs/agent-02-refined.png" alt="The same panel after a follow-up request, showing the recommender summary updated with an additional price filter and a lower catalog count" />
+        </div>
+        <p class="cs-figure-cap">One sentence of refinement — "products below $200" — and the card updates in place: the filter list grows, the catalog count drops from 65k to 10k. The count is the honesty mechanism; the marketer sees the scope tighten before anything goes live.</p>
       </div>
     </div>
 
@@ -587,5 +700,41 @@
     <span class="vibe-badge-text">Vibe coded · <span>Claude</span></span>
   </a>
 
+<script>
+(function(){
+  var vids=document.querySelectorAll('.cs-clip video[data-src]');  if(!('IntersectionObserver' in window)){vids.forEach(function(v){v.src=v.dataset.src;v.play();});return;}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(!v.src){v.src=v.dataset.src;} v.play().catch(function(){}); }
+    else { v.pause(); }
+  });},{rootMargin:'300px'});
+  vids.forEach(function(v){io.observe(v);});
+})();
+</script>
+<script>
+(function () {
+  var stage = document.getElementById('recsScroll');
+  var track = document.getElementById('recsTrack');
+  var dots = document.getElementById('recsDots');
+  if (!stage || !track) return;
+  var dotEls = dots ? Array.prototype.slice.call(dots.children) : [];
+  function update() {
+    if (window.matchMedia('(max-width: 768px)').matches) { track.style.transform = ''; return; }
+    var rect = stage.getBoundingClientRect();
+    var total = stage.offsetHeight - window.innerHeight;
+    var scrolled = Math.min(Math.max(-rect.top, 0), total);
+    var progress = total > 0 ? scrolled / total : 0;
+    var maxX = track.scrollWidth - track.clientWidth;
+    track.style.transform = 'translateX(' + (-progress * maxX) + 'px)';
+    if (dotEls.length > 1) {
+      var active = Math.round(progress * (dotEls.length - 1));
+      dotEls.forEach(function (d, i) { d.classList.toggle('active', i === active); });
+    }
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+</script>
 </body>
 </html>

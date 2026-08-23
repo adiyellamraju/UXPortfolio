@@ -125,7 +125,7 @@ const BoldGrid = () => (
 );
 
 const NAV_STATUSES = [
-  { text: "2 case studies being updated", dot: "#fbbf24", bg: "rgba(251,191,36,0.12)", border: "rgba(251,191,36,0.3)" },
+  { text: "1 case study being updated", dot: "#fbbf24", bg: "rgba(251,191,36,0.12)", border: "rgba(251,191,36,0.3)" },
   { text: "agent in training · finalized version coming soon", dot: "#b9a6ff", bg: "rgba(167,143,255,0.14)", border: "rgba(167,143,255,0.35)" },
 ];
 const BoldNav = () => {
@@ -973,10 +973,7 @@ const BoldFeatureCase = ({ c, featured, i }) => {
         : <span style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "#ff99d4", fontSize: 14.5, fontWeight: 700, marginTop: 8 }}>View case study <ArrowIcon size={13}/></span>}
     </div>
     <div className="bp-feature-mock" style={{ background: c.accent, position: "relative", overflow: "hidden", aspectRatio: c.slug === "pulse-nexio" ? "22 / 15" : "16 / 9", width: "100%", display: "flex", alignItems: "center", justifyContent: "center", order: 1 }}>
-      {c.slug === "recommendations-engine" && (
-        <span style={{ position: "absolute", top: 12, left: 12, right: 12, zIndex: 2, fontFamily: "ui-monospace,Menlo,monospace", fontSize: 10.5, fontWeight: 800, letterSpacing: 0.5, textTransform: "uppercase", color: "#1c1c26", background: "#ffd84d", border: "1px solid rgba(0,0,0,0.2)", boxShadow: "0 6px 18px rgba(0,0,0,0.35)", borderRadius: 8, padding: "7px 11px", textAlign: "center", lineHeight: 1.35 }}>Case study being updated · designs coming soon</span>
-      )}
-      {c.hero
+            {c.hero
         ? <img src={c.hero} alt={c.title} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "contain", objectPosition: "center", display: "block" }}/>
         : <BoldMiniMock slug={c.slug}/>}
     </div>
@@ -996,10 +993,7 @@ const BoldCase = ({ c }) => (
     onMouseEnter={e => { if (c.slug !== "experimentation") { e.currentTarget.style.borderColor = "rgba(167,143,255,0.6)"; e.currentTarget.style.transform = "translateY(-4px)"; } }}
     onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(167,143,255,0.22)"; e.currentTarget.style.transform = "translateY(0)"; }}>
     <div className="bp-case-mock" style={{ background: c.accent, position: "relative", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", padding: c.hero ? 0 : 20, height: 300 }}>
-      {c.slug === "recommendations-engine" && (
-        <span style={{ position: "absolute", top: 12, left: 12, right: 12, zIndex: 2, fontFamily: "ui-monospace,Menlo,monospace", fontSize: 10.5, fontWeight: 800, letterSpacing: 0.5, textTransform: "uppercase", color: "#1c1c26", background: "#ffd84d", border: "1px solid rgba(0,0,0,0.2)", boxShadow: "0 6px 18px rgba(0,0,0,0.35)", borderRadius: 8, padding: "7px 11px", textAlign: "center", lineHeight: 1.35 }}>Case study being updated · designs coming soon</span>
-      )}
-      {c.hero
+            {c.hero
         ? <img src={c.hero} alt={c.title} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block" }}/>
         : <BoldMiniMock slug={c.slug}/>}
     </div>
