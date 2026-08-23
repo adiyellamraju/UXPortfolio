@@ -26,6 +26,7 @@ const BOLD_RESPONSIVE_CSS = `
   }
   @media (max-width: 1024px) {
     .bp-nav { padding: 16px 24px !important; }
+    .bp-nav-spacer { height: 65px !important; }
     .bp-nav-links { gap: 14px !important; }
     .bp-hero { padding: 40px 24px 48px !important; }
     .bp-hero h1 { font-size: 48px !important; letter-spacing: -1.5px !important; }
@@ -47,6 +48,7 @@ const BOLD_RESPONSIVE_CSS = `
   }
   @media (max-width: 640px) {
     .bp-nav { padding: 12px 14px !important; flex-wrap: nowrap !important; gap: 8px !important; }
+    .bp-nav-spacer { height: 53px !important; }
     .bp-nav-brand { font-size: 11px !important; gap: 5px !important; flex-wrap: nowrap !important; white-space: nowrap !important; flex-shrink: 0 !important; }
     .bp-nav-brand .bp-nav-status { display: none !important; }
     .bp-nav-links { gap: 7px !important; font-size: 11px !important; flex-wrap: nowrap !important; white-space: nowrap !important; flex-shrink: 0 !important; }
@@ -140,10 +142,11 @@ const BoldNav = () => {
   }, []);
   const st = NAV_STATUSES[si];
   return (
+  <><div className="bp-nav-spacer" style={{ height: 73 }}/>
   <nav className="bp-nav" style={{
-    position: "sticky", top: 0, zIndex: 100, padding: "20px 32px",
+    position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, padding: "20px 32px",
     display: "flex", justifyContent: "space-between", alignItems: "center",
-    background: "rgba(28,28,38,0.7)", backdropFilter: "blur(20px)",
+    background: "rgba(28,28,38,0.55)", backdropFilter: "blur(22px) saturate(180%)", WebkitBackdropFilter: "blur(22px) saturate(180%)",
     borderBottom: "1px solid rgba(255,255,255,0.08)",
   }}>
     <div className="bp-nav-brand" style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: "ui-monospace,Menlo,monospace", fontSize: 13, fontWeight: 700, color: "#fff" }}>
@@ -167,7 +170,7 @@ const BoldNav = () => {
         /résumé
       </a>
     </div>
-  </nav>
+  </nav></>
   );
 };
 
