@@ -127,8 +127,7 @@ const BoldGrid = () => (
 );
 
 const NAV_STATUSES = [
-  { text: "1 case study being updated", dot: "#fbbf24", bg: "rgba(251,191,36,0.12)", border: "rgba(251,191,36,0.3)" },
-  { text: "agent in training · finalized version coming soon", dot: "#b9a6ff", bg: "rgba(167,143,255,0.14)", border: "rgba(167,143,255,0.35)" },
+  { text: "agent's confident, not always right", dot: "#b9a6ff", bg: "rgba(167,143,255,0.14)", border: "rgba(167,143,255,0.35)" },
 ];
 const BoldNav = () => {
   const [si, setSi] = React.useState(0);
