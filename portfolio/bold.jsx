@@ -975,8 +975,13 @@ const BoldFeatureCase = ({ c, featured, i }) => {
         ? <span style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "rgba(255,255,255,0.68)", fontSize: 14, fontWeight: 700, marginTop: 8 }}>Coming soon</span>
         : <span style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "#ff99d4", fontSize: 14.5, fontWeight: 700, marginTop: 8 }}>View case study <ArrowIcon size={13}/></span>}
     </div>
-    <div className="bp-feature-mock" style={{ background: c.accent, position: "relative", overflow: "hidden", aspectRatio: c.slug === "pulse-nexio" ? "22 / 15" : "16 / 9", width: "100%", display: "flex", alignItems: "center", justifyContent: "center", order: 1 }}>
-            {c.hero
+    <div className="bp-feature-mock" style={{ background: c.accent, position: "relative", overflow: "hidden", aspectRatio: c.hero2 ? "1214 / 428" : (c.slug === "pulse-nexio" ? "22 / 15" : "16 / 9"), width: "100%", display: "flex", alignItems: "center", justifyContent: "center", order: 1 }}>
+            {c.hero2
+        ? <div style={{ position: "absolute", inset: 0, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, padding: 14, alignItems: "center" }}>
+            <img src={c.hero2} alt={c.title} style={{ width: "100%", height: "auto", maxHeight: "100%", objectFit: "contain", display: "block", borderRadius: 6 }}/>
+            <img src={c.hero} alt={c.title} style={{ width: "100%", height: "auto", maxHeight: "100%", objectFit: "contain", display: "block", borderRadius: 6 }}/>
+          </div>
+        : c.hero
         ? <img src={c.hero} alt={c.title} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "contain", objectPosition: "center", display: "block" }}/>
         : <BoldMiniMock slug={c.slug}/>}
     </div>
@@ -996,7 +1001,12 @@ const BoldCase = ({ c }) => (
     onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(167,143,255,0.6)"; e.currentTarget.style.transform = "translateY(-4px)"; }}
     onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(167,143,255,0.22)"; e.currentTarget.style.transform = "translateY(0)"; }}>
     <div className="bp-case-mock" style={{ background: c.accent, position: "relative", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", padding: c.hero ? 0 : 20, height: 300 }}>
-            {c.hero
+            {c.hero2
+        ? <div style={{ position: "absolute", inset: 0, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, padding: 10 }}>
+            <img src={c.hero2} alt={c.title} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top left", display: "block", borderRadius: 6 }}/>
+            <img src={c.hero} alt={c.title} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top left", display: "block", borderRadius: 6 }}/>
+          </div>
+        : c.hero
         ? <img src={c.hero} alt={c.title} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block" }}/>
         : <BoldMiniMock slug={c.slug}/>}
     </div>

@@ -222,7 +222,10 @@
     .cs-placeholder-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     @media (max-width: 720px) { .cs-placeholder-grid { grid-template-columns: 1fr; } }
 
-    .cs-hero-figure { max-width: 1440px; margin: 0 auto; padding: 56px 64px 0; position: relative; z-index: 2; }
+    .cs-hero-figure { max-width: 1440px; margin: 0 auto; padding: 48px 64px 0; position: relative; z-index: 2; }
+    .cs-hero-figure .cs-hero-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: stretch; }
+    .cs-hero-figure .cs-figure { padding: 18px; background: rgba(255,255,255,0.03); }
+    .cs-hero-figure .cs-figure img { width: 100%; height: auto; max-height: 46vh; object-fit: contain; object-position: center top; display: block; }
 
     /* WIZARD HORIZONTAL SCROLL */
     .wizard-scroll { position: relative; height: 900vh; margin-top: 24px; }
@@ -302,6 +305,8 @@
       nav a { font-size: 13px; padding: 7px 12px; }
       .cs-footer-cta { padding: 48px 24px; }
       .cs-hero-figure { padding: 32px 24px 0; }
+      .cs-hero-figure .cs-hero-pair { grid-template-columns: 1fr; gap: 20px; }
+      .cs-hero-figure .cs-figure img { height: auto; max-height: 52vh; }
       h2 { font-size: 28px !important; letter-spacing: -0.6px !important; }
       h3 { font-size: 20px !important; }
     }
@@ -310,6 +315,8 @@
       .cs-parent-link { padding: 16px; }
       .cs-content { padding: 40px 16px 48px; }
       .cs-hero-figure { padding: 24px 16px 0; }
+      .cs-hero-figure .cs-figure { padding: 12px; }
+      .cs-hero-figure .cs-figure img { height: auto; max-height: none; }
       .cs-tag { font-size: 10px; padding: 4px 10px; }
       .cs-hero-sub { font-size: 16px; }
       nav { padding: 12px 12px; gap: 6px; flex-wrap: nowrap; max-width: calc(100vw - 24px); }
@@ -373,6 +380,18 @@
     </div>
   </section>
   <div class="hero-stripe"></div>
+
+  <!-- HERO FIGURE -->
+  <div class="cs-hero-figure">
+    <div class="cs-hero-pair">
+      <div class="cs-figure">
+        <img src="assets/case-studies/experimentation/d6-cohort-two-crop.png" alt="Cohort definition step with two cohorts split fifty-fifty" />
+      </div>
+      <div class="cs-figure">
+        <img src="assets/case-studies/experimentation/d8-analytics-crop.png" alt="Experiment summary: cohort performance table with lift and chance to beat control" />
+      </div>
+    </div>
+  </div>
 
   <!-- TIMELINE NOTE -->
   <div class="cs-parent-link">

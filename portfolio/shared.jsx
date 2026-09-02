@@ -89,6 +89,8 @@ const CASES = [
     blurb: "A/B testing and experimentation interface for Salesforce Personalization — making statistical tooling usable for both data scientists and non-technical marketers.",
     outcome: "Self-serve experimentation, no eng support required.",
     accent: "linear-gradient(145deg, #110520 0%, #2a0a4a 55%, #491cff 100%)",
+    hero: "assets/case-studies/experimentation/d8-analytics-crop.png",
+    hero2: "assets/case-studies/experimentation/d6-cohort-two-crop.png",
   },
   {
     slug: "flying-squirrel",
