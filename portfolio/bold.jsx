@@ -910,7 +910,6 @@ const BoldToolkit = () => (
 
 // ─── WORK — image-forward showcase: featured hero + large image-top cards ───
 const openCase = (c) => {
-  if (c.slug === "experimentation") return;
   track("case_study_view", { project: c.slug });
   const map = {
     "personalization": "case-personalization-private.html",
@@ -918,6 +917,7 @@ const openCase = (c) => {
     "pulse-nexio": "case-tableau-pulse.html",
     "data-stories": "case-data-stories.html",
     "flying-squirrel": "case-flying-squirrel.html",
+    "experimentation": "case-experimentation.html",
   };
   if (map[c.slug]) window.location.href = map[c.slug];
 };
@@ -940,7 +940,7 @@ const BoldWork = () => {
   );
 };
 const BoldFeatureCase = ({ c, featured, i }) => {
-  const isComingSoon = c.slug === "experimentation";
+  const isComingSoon = false;
   const flip = i % 2 === 1;
   return (
   <div
@@ -989,11 +989,11 @@ const BoldCase = ({ c }) => (
     onClick={() => openCase(c)}
     style={{
       border: "1px solid rgba(167,143,255,0.22)", borderRadius: 20, overflow: "hidden",
-      cursor: c.slug === "experimentation" ? "default" : "pointer",
+      cursor: "pointer",
       background: "#1c1c26", transition: "border-color .2s, transform .2s",
       display: "flex", flexDirection: "column",
     }}
-    onMouseEnter={e => { if (c.slug !== "experimentation") { e.currentTarget.style.borderColor = "rgba(167,143,255,0.6)"; e.currentTarget.style.transform = "translateY(-4px)"; } }}
+    onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(167,143,255,0.6)"; e.currentTarget.style.transform = "translateY(-4px)"; }}
     onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(167,143,255,0.22)"; e.currentTarget.style.transform = "translateY(0)"; }}>
     <div className="bp-case-mock" style={{ background: c.accent, position: "relative", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", padding: c.hero ? 0 : 20, height: 300 }}>
             {c.hero
@@ -1003,7 +1003,7 @@ const BoldCase = ({ c }) => (
     <div className="bp-case-body" style={{ padding: "22px 24px", display: "flex", flexDirection: "column", gap: 9 }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10 }}>
         <span style={{ fontFamily: "ui-monospace,Menlo,monospace", fontSize: 10.5, color: "rgba(255,255,255,0.68)" }}>{c.year} · {c.company}</span>
-        <span style={{ fontFamily: "ui-monospace,Menlo,monospace", fontSize: 10, fontWeight: 700, letterSpacing: 0.8, textTransform: "uppercase", color: "#ff99d4" }}>{c.slug === "experimentation" ? "Coming soon" : c.tags[0]}</span>
+        <span style={{ fontFamily: "ui-monospace,Menlo,monospace", fontSize: 10, fontWeight: 700, letterSpacing: 0.8, textTransform: "uppercase", color: "#ff99d4" }}>{c.tags[0]}</span>
       </div>
       <h3 style={{ fontSize: 20, fontWeight: 900, lineHeight: 1.2, letterSpacing: -0.4, color: "#ffffff", margin: 0 }}>{c.title}</h3>
       <p style={{ fontSize: 13.5, color: "rgba(255,255,255,0.66)", lineHeight: 1.5, margin: 0 }}>{c.blurb}</p>
